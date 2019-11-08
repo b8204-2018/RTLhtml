@@ -4,6 +4,45 @@
     <title>About me</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon">
+    <script>
+        function getArray(str) {
+            str = str + ',';
+            let arr = new Array();
+            let l = 0;
+            let buff = '';
+            for (let i = 0; i < str.length; i++){
+                if (str[i] != ','){
+                    buff = buff + str[i];
+                }
+                else {
+                    arr[l] = buff;
+                    buff='';
+                    l++;
+                }
+            }
+            return arr;
+        }
+
+        function sort() {
+            let str = document.getElementById("array").value;
+            let arr = getArray(str);
+            for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+                let wasSwap = false;
+                for (let j = 0, endJ = endI - i; j < endJ; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                        wasSwap = true;
+                    }
+                }
+                if (!wasSwap) break;
+            }
+            let ans='';
+            for (let i = 0; i < arr.length; i++) {
+                ans = ans + ' ' + arr[i];
+            }
+            document.getElementById('sorted').innerHTML=ans;
+        }
+    </script>
 </head>
 <body>
 <div>
@@ -31,8 +70,11 @@
             2014. Prior to that, i played in the CrossFire. I was familiar only play with bots in CS ☺.
             Basically I only play with AK 47 and M4A1 s. In the same year I started playing DotA 2. Due to its strong game I got after calibration 1k MMP. But at the moment I get out of the swamp in which I drove himself</li>
     </ul>
-    <b>Напиши сюда что-нибудь, но ничего не произойдет</b><br>
-    <input type="text" size="40">
+    Чтобы показать какой я крутой программист я вставил сюда сортировку-пузырьком. <br>
+    <b>Введи последовательность через запятую</b><br>
+    <input name="array" type="text" size="40" id="array">
+    <input name="sort" type="button" size="40" value="Сортировать" id="sort" onclick="sort()">
+    <p id="sorted"></p>
     <h3>Links</h3>
     <a href="https://vk.com/refre5h" target="_blank"><img src="/images/vk.png" width="25"
                                                           height="25" border="0" alt="Ссылка на vk"></a>
