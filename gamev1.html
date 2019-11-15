@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Igrushka</title>
+    <link rel="stylesheet" href="/css/gamev1.css">
+    <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon">
+    <script>
+        function Change(num,len) {
+            for (let i = 1; i <= len; i++){
+                let name = 'btn'+i;
+                let select = document.getElementById(name);
+                if (i%num==0) {
+                    if(select.classList.contains('black')){
+                        select.classList.remove('black');
+                    }
+                    else {
+                        select.classList.add('black');
+                    }
+                }
+            }
+            return;
+        }
+
+        function Create(countElem) {
+            document.getElementById('Count').remove();
+            document.getElementById('but').remove();
+            for (let i = 1; i <= countElem; i++) {
+            let btn = document.createElement('input');
+            btn.type = 'button';
+            btn.classList.add('btn');
+            btn.id = 'btn'+i;
+            document.body.appendChild(btn);
+            btn.onclick = function (){Change(i,countElem)};
+            }
+            return;
+        }
+    </script>
+</head>
+<body bgcolor="#e5d8da">
+ <input type="text" id="Count">
+ <input type="button" onclick="Create(document.getElementById('Count').value)" value="Сколько кружков" id="but">
+</body>
+</html>
