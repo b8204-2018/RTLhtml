@@ -1,9 +1,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Whack a Mol</title>
-    <link rel="stylesheet" href="/css/whack.css">
-    <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon">
+    <title>Whack a Mole</title>
+    <link rel="stylesheet" href="whack.css">
     <script>
         let scr = 0;
         function ChangeScore(row,col) {
@@ -11,17 +10,21 @@
             let select = document.getElementById(name);
             if(select.classList.contains('black')){
                     scr++;
-                }
+                    let score = document.getElementById('counter');
+                    score.textContent=scr;
+            }
         }
 
-        function Game(colunms,rows) {
-            let i = Math.ceil(Math.random()*rows);
-            let j = Math.ceil(Math.random()*colunms);
+        function Mole(colunms,rows) {
+            let i = Math.round(Math.random()*(rows-1));
+            let j = Math.round(Math.random()*(colunms-1));
             let name = 'btn'+i+j;
             let btn = document.getElementById(name);
             btn.classList.add('black');
-            setTimeout(function (){return},3000);
-            btn.classList.remove('black');
+            setTimeout(function (){
+                btn.classList.remove('black');
+                Mole(colunms,rows);
+            },800);
         }
 
         function Create(colunms,rows) {
@@ -36,9 +39,9 @@
             document.body.appendChild(score);
             document.body.appendChild(counter);
             let table = document.createElement('table');
-            for (let i = 1; i<=rows;i++){
+            for (let i = 0; i<rows;i++){
                 let row = document.createElement('tr');
-                for (let j = 1; j<=colunms; j++){
+                for (let j = 0; j<colunms; j++){
                     let col = document.createElement('td');
                     let btn = document.createElement('input');
                     btn.type = 'button';
@@ -51,15 +54,13 @@
                 table.appendChild(row);
             }
             document.body.appendChild(table);
-            while (scr != 100) {
-                Game(colunms,rows);
-            }
+            Mole(colunms,rows);
         }
     </script>
 </head>
 <body bgcolor="#e5d8da">
-<input type="text" id="CountColumns" placeholder="Кол-во столбцов">
-<input type="text" id="CountRows" placeholder="Кол-во строк">
-<input type="button" onclick="Create(document.getElementById('CountColumns').value,document.getElementById('CountRows').value)" value="Создать" id="but">
+    <input type="text" id="CountColumns" placeholder="Кол-во столбцов">
+    <input type="text" id="CountRows" placeholder="Кол-во строк">
+    <input type="button" onclick="Create(document.getElementById('CountColumns').value,document.getElementById('CountRows').value)" value="Создать" id="but">
 </body>
 </html>
