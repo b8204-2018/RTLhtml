@@ -4,58 +4,12 @@
     <title>Game v2</title>
     <link rel="stylesheet" href="/css/gamev2.css">
     <link rel="shortcut icon" href="/ico/favicon.ico" type="image/x-icon">
-    <script>
-        function Change(changeRow,changeCol,colunms,rows) {
-            for (let i=1; i<=rows;i++){
-                let name = 'btn'+i+changeCol;
-                let select = document.getElementById(name);
-                if(select.classList.contains('black')){
-                    select.classList.remove('black');
-                }
-                else {
-                    select.classList.add('black');
-                }
-            }
-            for (let j=1; j<=colunms;j++) {
-                let name = 'btn'+changeRow+j;
-                let select = document.getElementById(name);
-                if (j!=changeCol) {
-                    if(select.classList.contains('black')){
-                        select.classList.remove('black');
-                    }
-                    else {
-                        select.classList.add('black');
-                    }
-                }
-            }
-        }
-
-        function Create(colunms,rows) {
-            document.getElementById('CountColumns').remove();
-            document.getElementById('CountRows').remove();
-            document.getElementById('but').remove();
-            let table = document.createElement('table');
-            for (let i = 1; i<=rows;i++){
-                let row = document.createElement('tr');
-                for (let j = 1; j<=colunms; j++){
-                    let col = document.createElement('td');
-                    let btn = document.createElement('input');
-                    btn.type = 'button';
-                    btn.classList.add('btn');
-                    btn.id = 'btn'+i+j;
-                    btn.onclick = function (){Change(i,j,colunms,rows)};
-                    col.appendChild(btn);
-                    row.appendChild(col);
-                }
-                table.appendChild(row);
-            }
-            document.body.appendChild(table);
-        }
+    <script src="/src/gamev2.js">
     </script>
 </head>
 <body bgcolor="#e5d8da">
-    <input type="text" id="CountColumns" value="Кол-во столбцов">
-    <input type="text" id="CountRows" value="Кол-во строк">
+    <input type="text" id="CountColumns" placeholder="Кол-во столбцов">
+    <input type="text" id="CountRows" placeholder="Кол-во строк">
     <input type="button" onclick="Create(document.getElementById('CountColumns').value,document.getElementById('CountRows').value)" value="Создать" id="but">
 </body>
 </html>
