@@ -10,6 +10,8 @@ table {
 td {
     horiz-align: center;
     padding: 10px;
+    text-align: left;
+    width: 50%;
 }
 
 p {
